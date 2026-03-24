@@ -547,7 +547,7 @@ export function HomeRouteView() {
         </div>
       </section>
 
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <CtaBand />
       <SiteFooter />
     </main>
@@ -701,7 +701,7 @@ export function ContactRouteView() {
         </div>
       </section>
 
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <CtaBand />
       <SiteFooter />
     </main>
