@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 
+import { TryNowForm } from "@/components/hero-try-now";
 import {
   aboutContent,
   contactContent,
   homeContent,
   images,
   sharedContent,
-  testimonials,
 } from "@/components/site-content";
 
 function revealStyle(delay: number, distance = 24): CSSProperties {
@@ -29,17 +29,6 @@ function ArrowIcon({ dark = false }: { dark?: boolean }) {
       <path
         d="M6.6 9.861 5.667 8.889 8.678 5.694H0V4.31h8.678L5.684 1.111 6.6.139 11.182 5 6.6 9.861Z"
         fill={dark ? "#0D0D0D" : "#FFFFFF"}
-      />
-    </svg>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg aria-hidden="true" className="site-star-icon" viewBox="0 0 24 24">
-      <path
-        d="m12 2.75 2.86 5.79 6.39.93-4.62 4.5 1.09 6.36L12 17.32l-5.72 3.01 1.09-6.36-4.62-4.5 6.39-.93L12 2.75Z"
-        fill="#FDBB2D"
       />
     </svg>
   );
@@ -188,7 +177,11 @@ function ExternalContactLink({
   );
 }
 
-function SiteHeader({ currentPath }: { currentPath: "/" | "/about-us" | "/contact" }) {
+function SiteHeader({
+  currentPath,
+}: {
+  currentPath: "/" | "/about-us" | "/contact" | "/try-now";
+}) {
   const navItems = [
     { href: "/about-us", label: "About" },
     { href: "/contact", label: "Contact us" },
@@ -242,56 +235,6 @@ function SiteHeader({ currentPath }: { currentPath: "/" | "/about-us" | "/contac
   );
 }
 
-function TestimonialsSection() {
-  return (
-    <section className="section testimonials-section">
-      <div className="shell">
-        <div className="section-header section-header--center">
-          <div data-reveal="true" style={revealStyle(0)}>
-            <SectionTag>Testimonials</SectionTag>
-          </div>
-          <h2 className="section-title" data-reveal="true" style={revealStyle(90)}>
-            What users say about our screening tool
-          </h2>
-          <p className="section-copy" data-reveal="true" style={revealStyle(150)}>
-            Real stories and honest reviews from those we&apos;ve cared for
-          </p>
-        </div>
-        <div className="testimonial-grid">
-          {testimonials.map((item, index) => (
-            <article
-              className="testimonial-card"
-              key={`${item.name}-${item.role}`}
-              data-reveal="true"
-              style={revealStyle(80 + index * 40, 20)}
-            >
-              <div className="testimonial-stars" aria-label="5 stars">
-                {Array.from({ length: 5 }).map((_, starIndex) => (
-                  <StarIcon key={`${item.name}-star-${starIndex}`} />
-                ))}
-              </div>
-              <p className="testimonial-quote">{item.quote}</p>
-              <div className="testimonial-person">
-                <Image
-                  className="testimonial-avatar"
-                  src={item.image.src}
-                  alt={item.image.alt}
-                  width={item.image.width}
-                  height={item.image.height}
-                />
-                <div>
-                  <h3 className="testimonial-name">{item.name}</h3>
-                  <p className="testimonial-role">{item.role}</p>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function CtaBand() {
   return (
     <section className="section">
@@ -304,8 +247,8 @@ function CtaBand() {
             <h2 className="cta-band-title" data-reveal="true" style={revealStyle(80, 18)}>
               {sharedContent.ctaDescription}
             </h2>
-            <ButtonLink href="/contact" variant="secondary" delay={150}>
-              Contact us
+            <ButtonLink href="/try-now" variant="secondary" delay={150}>
+              Try now
             </ButtonLink>
           </div>
           <div className="cta-band-pattern" aria-hidden="true" />
@@ -491,15 +434,20 @@ export function HomeRouteView() {
             <h1 className="hero-title" data-reveal="true" style={revealStyle(60, 20)}>
               {homeContent.title}
             </h1>
-          <p className="hero-description" data-reveal="true" style={revealStyle(120, 20)}>
-            {homeContent.description}
-          </p>
-          <p className="section-note" data-reveal="true" style={revealStyle(190)}>
+            <p className="hero-description" data-reveal="true" style={revealStyle(120, 20)}>
+              {homeContent.description}
+            </p>
+            <p className="section-note" data-reveal="true" style={revealStyle(190)}>
               {aboutContent.whoWeAreNote}
-          </p>
-          <ButtonLink href="/contact" delay={220}>
-            Contact us
-          </ButtonLink>
+            </p>
+            <div className="hero-action-row" data-reveal="true" style={revealStyle(220)}>
+              <ButtonLink href="/contact">
+                Contact us
+              </ButtonLink>
+              <ButtonLink href="/try-now" variant="secondary">
+                Try now
+              </ButtonLink>
+            </div>
           </div>
           <HeroEyeStack />
         </div>
@@ -549,6 +497,74 @@ export function HomeRouteView() {
 
       {/* <TestimonialsSection /> */}
       <CtaBand />
+      <SiteFooter />
+    </main>
+  );
+}
+
+export function TryNowRouteView() {
+  const tryNowFeatures = [
+    "Upload a clear photo of your left or right eye",
+    "Share a few basic details about yourself",
+    "Get your diabetes risk result instantly",
+  ];
+
+  return (
+    <main className="site-page">
+      <SiteHeader currentPath="/try-now" />
+      <section className="page-hero page-hero--narrow">
+        <div className="shell page-hero-shell page-hero-shell--center">
+          <div data-reveal="true" style={revealStyle(0)}>
+            <SectionTag>Try now</SectionTag>
+          </div>
+          <h1 className="page-title" data-reveal="true" style={revealStyle(70, 18)}>
+            Check Your Diabetes Risk with a Simple Eye Photo
+          </h1>
+          <p className="page-copy" data-reveal="true" style={revealStyle(130, 18)}>
+            Upload a photo of your eye, fill in a few quick details, and our AI will check for
+            early signs of diabetes risk — no needles, no lab tests.
+          </p>
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
+        <div className="shell try-now-page-grid">
+          <div className="try-now-page-copy">
+            <div data-reveal="true" style={revealStyle(20)}>
+              <SectionTag>How it works</SectionTag>
+            </div>
+            <h2 className="section-title" data-reveal="true" style={revealStyle(90)}>
+              Your result in three simple steps
+            </h2>
+            <p className="section-copy" data-reveal="true" style={revealStyle(150)}>
+              Take a photo of your eye, answer a few quick questions, and our AI will assess your
+              diabetes risk in seconds. It&apos;s fast, private, and takes less than a minute.
+            </p>
+            <ul className="feature-list">
+              {tryNowFeatures.map((feature, index) => (
+                <li
+                  className="feature-item"
+                  data-reveal="true"
+                  key={feature}
+                  style={revealStyle(190 + index * 45, 18)}
+                >
+                  <span className="feature-tick" aria-hidden="true" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="section-note" data-reveal="true" style={revealStyle(340)}>
+              {aboutContent.whoWeAreNote}
+            </p>
+          </div>
+
+          <div data-reveal="true" style={revealStyle(110, 18)}>
+            <TryNowForm />
+          </div>
+        </div>
+      </section>
+
+      {/* <CtaBand /> */}
       <SiteFooter />
     </main>
   );

@@ -280,6 +280,7 @@ export const sharedContent = {
     "Stay up to date on the latest features and releases by joining our socials",
   footerLinks: [
     { label: "Home", href: "/" },
+    { label: "Try now", href: "/try-now" },
     { label: "About", href: "/about-us" },
     { label: "Contact", href: "/contact" },
   ],
