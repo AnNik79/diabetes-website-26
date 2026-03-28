@@ -4,10 +4,11 @@ import Image from "next/image";
 import { useEffect, useId, useState } from "react";
 
 type FormValues = {
-  which_eye: "left" | "right";
-  sex: "M" | "F" | "O";
+  which_eye: "left" | "right" | "";
+  sex: "M" | "F" | "O" | "";
   age: string;
   eye_disorders: string;
+  medications: string;
 };
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
@@ -26,10 +27,11 @@ type PredictionResponse = {
 };
 
 const initialValues: FormValues = {
-  which_eye: "left",
-  sex: "M",
-  age: "45",
-  eye_disorders: "none",
+  which_eye: "",
+  sex: "",
+  age: "",
+  eye_disorders: "",
+  medications: "",
 };
 
 const defaultMessage = "Upload a clear eye photo to check your diabetes risk.";
@@ -144,6 +146,20 @@ export function TryNowForm() {
       return;
     }
 
+    if (!values.which_eye) {
+      setSubmitState("error");
+      setMessage("Please select which eye you are uploading a photo of.");
+      setPredictionResult(null);
+      return;
+    }
+
+    if (!values.sex) {
+      setSubmitState("error");
+      setMessage("Please select your sex.");
+      setPredictionResult(null);
+      return;
+    }
+
     if (!values.age.trim()) {
       setSubmitState("error");
       setMessage("Please enter your age before checking your risk.");
@@ -154,6 +170,12 @@ export function TryNowForm() {
     setSubmitState("submitting");
     setMessage("Analyzing your eye photo. This may take up to 60 seconds.");
     setPredictionResult(null);
+
+    const meds = values.medications.trim();
+    if (meds) {
+      const combined = `${values.eye_disorders}. Medications: ${meds}`;
+      formData.set("eye_disorders", combined);
+    }
 
     try {
       const response = await fetch("/api/predict", {
@@ -246,7 +268,8 @@ export function TryNowForm() {
 
           <label className="form-field">
             <span>Which eye</span>
-            <select name="which_eye" onChange={handleFieldChange} value={values.which_eye}>
+            <select name="which_eye" onChange={handleFieldChange} value={values.which_eye} required>
+              <option value="" disabled>Select eye</option>
               <option value="left">Left</option>
               <option value="right">Right</option>
             </select>
@@ -254,7 +277,8 @@ export function TryNowForm() {
 
           <label className="form-field">
             <span>Sex</span>
-            <select name="sex" onChange={handleFieldChange} value={values.sex}>
+            <select name="sex" onChange={handleFieldChange} value={values.sex} required>
+              <option value="" disabled>Select sex</option>
               <option value="M">Male</option>
               <option value="F">Female</option>
               <option value="O">Other</option>
@@ -268,7 +292,7 @@ export function TryNowForm() {
               min="1"
               name="age"
               onChange={handleFieldChange}
-              placeholder="45"
+              placeholder="Enter your age"
               required
               type="number"
               value={values.age}
@@ -280,9 +304,20 @@ export function TryNowForm() {
             <textarea
               name="eye_disorders"
               onChange={handleFieldChange}
-              placeholder="E.g. glaucoma, cataracts — or leave blank if none."
-              rows={4}
+              placeholder="E.g. glaucoma, cataracts — or type 'none' if not applicable."
+              rows={3}
               value={values.eye_disorders}
+            />
+          </label>
+
+          <label className="form-field form-field--full">
+            <span>Do you take any medications?</span>
+            <p className="form-field-hint">If so, list them and how often you take them.</p>
+            <textarea
+              onChange={handleFieldChange}
+              placeholder="E.g. Metformin twice daily, Lisinopril once daily — or leave blank if none."
+              rows={3}
+              value={values.medications}
             />
           </label>
         </div>
