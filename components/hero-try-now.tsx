@@ -172,10 +172,11 @@ export function TryNowForm() {
     setPredictionResult(null);
 
     const meds = values.medications.trim();
-    if (meds) {
-      const combined = `${values.eye_disorders}. Medications: ${meds}`;
-      formData.set("eye_disorders", combined);
-    }
+    const combined = meds
+      ? `${values.eye_disorders}. Medications: ${meds}`
+      : values.eye_disorders;
+    formData.set("eye_disorders", combined);
+    formData.delete("medications");
 
     try {
       const response = await fetch("/api/predict", {
@@ -314,6 +315,7 @@ export function TryNowForm() {
             <span>Do you take any medications?</span>
             <p className="form-field-hint">If so, list them and how often you take them.</p>
             <textarea
+              name="medications"
               onChange={handleFieldChange}
               placeholder="E.g. Metformin twice daily, Lisinopril once daily — or leave blank if none."
               rows={3}
