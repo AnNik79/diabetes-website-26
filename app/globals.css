@@ -413,6 +413,18 @@ summary::-webkit-details-marker {
   line-height: 1.6;
 }
 
+.hero-demo-disclaimer {
+  margin: 2px 0 0;
+  border: 1px solid rgba(191, 59, 59, 0.22);
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, rgba(191, 59, 59, 0.12), rgba(191, 59, 59, 0.04));
+  color: #8f1f1f;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
 .hero-demo-form {
   display: grid;
   gap: 18px;

@@ -219,6 +219,10 @@ export function TryNowForm() {
         <p className="hero-demo-copy">
           Upload an eye photo, fill in a few details, and get your diabetes risk result in seconds.
         </p>
+        <p className="hero-demo-disclaimer">
+          If you have recently taken medication, avoid taking the test as it may affect your
+          results. For accuracy, take it a few hours before or after your medication.
+        </p>
       </div>
 
       <form className="hero-demo-form" onSubmit={handleSubmit}>
