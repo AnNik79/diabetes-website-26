@@ -309,11 +309,11 @@ export function TryNowForm() {
 
           <div className="hero-demo-field-column">
             <label className="form-field">
-              <span>Any known eye conditions?</span>
+              <span>Any known health conditions?</span>
               <textarea
                 name="eye_disorders"
                 onChange={handleFieldChange}
-                placeholder="E.g. glaucoma, cataracts — or type 'none' if not applicable."
+                placeholder="E.g. glaucoma, diabetes — or type 'none' if not applicable."
                 rows={5}
                 value={values.eye_disorders}
               />
