@@ -171,10 +171,11 @@ export function TryNowForm() {
     setMessage("Analyzing your eye photo. This may take up to 60 seconds.");
     setPredictionResult(null);
 
-    const meds = values.medications.trim();
-    const combined = meds
-      ? `${values.eye_disorders}. Medications: ${meds}`
-      : values.eye_disorders;
+    const details = [
+      values.eye_disorders.trim(),
+      values.medications.trim() ? `Medications: ${values.medications.trim()}` : "",
+    ].filter(Boolean);
+    const combined = details.length > 0 ? details.join(". ") : "none";
     formData.set("eye_disorders", combined);
     formData.delete("medications");
 
@@ -257,75 +258,79 @@ export function TryNowForm() {
         </div>
 
         <div className="hero-demo-form-grid">
-          <label className="form-field form-field--full hero-demo-upload" htmlFor={fileInputId}>
-            <span>Eye image</span>
-            <input
-              accept="image/*"
-              className="hero-demo-file-input"
-              id={fileInputId}
-              name="image"
-              onChange={handleFileChange}
-              required
-              type="file"
-            />
-            <small className="hero-demo-file-name">{fileName}</small>
-          </label>
+          <div className="hero-demo-field-column">
+            <label className="form-field hero-demo-upload" htmlFor={fileInputId}>
+              <span>Eye image</span>
+              <input
+                accept="image/*"
+                className="hero-demo-file-input"
+                id={fileInputId}
+                name="image"
+                onChange={handleFileChange}
+                required
+                type="file"
+              />
+              <small className="hero-demo-file-name">{fileName}</small>
+            </label>
 
-          <label className="form-field">
-            <span>Which eye</span>
-            <select name="which_eye" onChange={handleFieldChange} value={values.which_eye} required>
-              <option value="" disabled>Select eye</option>
-              <option value="left">Left</option>
-              <option value="right">Right</option>
-            </select>
-          </label>
+            <label className="form-field">
+              <span>Which eye</span>
+              <select name="which_eye" onChange={handleFieldChange} value={values.which_eye} required>
+                <option value="" disabled>Select eye</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+              </select>
+            </label>
 
-          <label className="form-field">
-            <span>Sex</span>
-            <select name="sex" onChange={handleFieldChange} value={values.sex} required>
-              <option value="" disabled>Select sex</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
-              <option value="O">Other</option>
-            </select>
-          </label>
+            <label className="form-field">
+              <span>Sex</span>
+              <select name="sex" onChange={handleFieldChange} value={values.sex} required>
+                <option value="" disabled>Select sex</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+              </select>
+            </label>
 
-          <label className="form-field">
-            <span>Age</span>
-            <input
-              inputMode="numeric"
-              min="1"
-              name="age"
-              onChange={handleFieldChange}
-              placeholder="Enter your age"
-              required
-              type="number"
-              value={values.age}
-            />
-          </label>
+            <label className="form-field">
+              <span>Age</span>
+              <input
+                inputMode="numeric"
+                min="1"
+                name="age"
+                onChange={handleFieldChange}
+                placeholder="Enter your age"
+                required
+                type="number"
+                value={values.age}
+              />
+            </label>
+          </div>
 
-          <label className="form-field form-field--full">
-            <span>Any known eye conditions?</span>
-            <textarea
-              name="eye_disorders"
-              onChange={handleFieldChange}
-              placeholder="E.g. glaucoma, cataracts — or type 'none' if not applicable."
-              rows={3}
-              value={values.eye_disorders}
-            />
-          </label>
+          <div className="hero-demo-field-column">
+            <label className="form-field">
+              <span>Any known eye conditions?</span>
+              <textarea
+                name="eye_disorders"
+                onChange={handleFieldChange}
+                placeholder="E.g. glaucoma, cataracts — or type 'none' if not applicable."
+                rows={5}
+                value={values.eye_disorders}
+              />
+            </label>
 
-          <label className="form-field form-field--full">
-            <span>Do you take any medications?</span>
-            <p className="form-field-hint">If so, list them and how often you take them.</p>
-            <textarea
-              name="medications"
-              onChange={handleFieldChange}
-              placeholder="E.g. Metformin twice daily, Lisinopril once daily — or leave blank if none."
-              rows={3}
-              value={values.medications}
-            />
-          </label>
+            <label className="form-field">
+              <span>Do you take any medications?</span>
+              <textarea
+                name="medications"
+                onChange={handleFieldChange}
+                placeholder="E.g. Metformin twice daily, Lisinopril once daily — or leave blank if none."
+                rows={5}
+                value={values.medications}
+              />
+            </label>
+          </div>
+
         </div>
 
         <button className="form-submit-button" disabled={submitState === "submitting"} type="submit">
