@@ -144,17 +144,15 @@ summary::-webkit-details-marker {
   position: relative;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 58px;
+  height: 36px;
   flex: 0 0 auto;
 }
 
 .site-logo-icon {
   width: 100%;
   height: 100%;
-  border-radius: 11px;
-  object-fit: cover;
-  box-shadow: 0 8px 18px rgba(23, 80, 172, 0.18);
+  object-fit: contain;
 }
 
 .site-logo-copy {
@@ -1522,8 +1520,8 @@ summary::-webkit-details-marker {
   }
 
   .site-logo-mark {
-    width: 34px;
-    height: 34px;
+    width: 48px;
+    height: 30px;
   }
 
   .site-logo-title {

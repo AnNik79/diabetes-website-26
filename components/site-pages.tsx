@@ -87,7 +87,13 @@ function LogoLockup({ variant = "nav" }: { variant?: "nav" | "footer" }) {
   return (
     <Link className="site-logo" href="/">
       <span className="site-logo-mark" aria-hidden="true">
-        <Image className="site-logo-icon" src="/icon.svg" alt="" width={40} height={40} />
+        <Image
+          className="site-logo-icon"
+          src="/assets/logos/header-eye.png"
+          alt=""
+          width={119}
+          height={74}
+        />
       </span>
       <span className="site-logo-copy">
         <span

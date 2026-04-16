@@ -1,23 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
-  <title id="title">BSD app icon</title>
-  <desc id="desc">A simple BSD monogram on a blue rounded-square background.</desc>
-  <defs>
-    <linearGradient id="bg" x1="28" y1="24" x2="228" y2="232" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1d63d2" />
-      <stop offset="1" stop-color="#0f4aa8" />
-    </linearGradient>
-  </defs>
-  <rect width="256" height="256" rx="56" fill="url(#bg)" />
-  <text
-    x="128"
-    y="156"
-    fill="#ffffff"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="84"
-    font-weight="700"
-    letter-spacing="2"
-    text-anchor="middle"
-  >
-    BSD
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="BioTransport eye logo">
+  <rect width="256" height="256" rx="52" fill="#ffffff" />
+  <path
+    d="M22 128C49 89 88 67 128 67s79 22 106 61c-27 39-66 61-106 61S49 167 22 128Z"
+    fill="#17243a"
+  />
+  <path
+    d="M51 128c22-27 48-41 77-41s55 14 77 41c-22 27-48 41-77 41s-55-14-77-41Z"
+    fill="#f7fafc"
+  />
+  <ellipse cx="128" cy="128" rx="24" ry="42" fill="#93a3aa" />
+  <rect x="115" y="105" width="26" height="46" rx="6" fill="#e8eef0" />
+  <rect x="121" y="112" width="14" height="32" rx="4" fill="#6f8189" />
+  <circle cx="94" cy="113" r="9" fill="#cc3b42" />
+  <circle cx="94" cy="143" r="9" fill="#cc3b42" />
+  <circle cx="162" cy="113" r="9" fill="#167e89" />
+  <circle cx="162" cy="143" r="9" fill="#167e89" />
+  <circle cx="78" cy="128" r="5" fill="#7e9298" />
+  <circle cx="178" cy="128" r="5" fill="#7e9298" />
 </svg>
