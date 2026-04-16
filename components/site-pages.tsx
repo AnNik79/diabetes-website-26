@@ -67,17 +67,6 @@ function MapPinIcon() {
   );
 }
 
-function PlusIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 21 21" className="site-plus-icon">
-      <path
-        d="M21 9v2h-9.45v9h-2.1v-9H0V9h9.45V0h2.1v9H21Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
 function ContactTypeIcon({
   type,
 }: {
@@ -98,8 +87,7 @@ function LogoLockup({ variant = "nav" }: { variant?: "nav" | "footer" }) {
   return (
     <Link className="site-logo" href="/">
       <span className="site-logo-mark" aria-hidden="true">
-        <span className="site-logo-ring" />
-        <PlusIcon />
+        <Image className="site-logo-icon" src="/icon.svg" alt="" width={40} height={40} />
       </span>
       <span className="site-logo-copy">
         <span
