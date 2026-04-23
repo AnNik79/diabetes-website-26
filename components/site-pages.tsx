@@ -196,6 +196,26 @@ function SmartLink({
   );
 }
 
+function ScreeningMenu({ variant }: { variant: "nav" | "mobile" | "footer" }) {
+  return (
+    <div className={`screening-menu screening-menu--${variant}`} aria-label="Choose screening type">
+      {sharedContent.screeningMenu.map((item) => (
+        <SmartLink
+          className={
+            item.current
+              ? "screening-menu-option screening-menu-option--active"
+              : "screening-menu-option"
+          }
+          href={item.href}
+          key={item.label}
+        >
+          {item.label}
+        </SmartLink>
+      ))}
+    </div>
+  );
+}
+
 function SiteHeader({
   currentPath,
 }: {
@@ -211,9 +231,7 @@ function SiteHeader({
       <div className="shell site-header-shell">
         <LogoLockup />
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
-          <SmartLink className="site-nav-link site-nav-link--screening" href={sharedContent.otherScreening.href}>
-            {sharedContent.otherScreening.label}
-          </SmartLink>
+          <ScreeningMenu variant="nav" />
           {navItems.map((item) =>
             item.href === "/contact" ? (
               <ButtonLink href={item.href} key={item.href}>
@@ -223,7 +241,9 @@ function SiteHeader({
               <Link
                 key={item.href}
                 className={
-                  currentPath === item.href ? "site-nav-link site-nav-link--active" : "site-nav-link"
+                  currentPath === item.href
+                    ? "site-nav-link site-nav-link--button site-nav-link--active"
+                    : "site-nav-link site-nav-link--button"
                 }
                 href={item.href}
               >
@@ -239,14 +259,12 @@ function SiteHeader({
             <span />
           </summary>
           <div className="site-mobile-panel">
-            <SmartLink className="site-nav-link site-nav-link--screening" href={sharedContent.otherScreening.href}>
-              {sharedContent.otherScreening.label}
-            </SmartLink>
+            <ScreeningMenu variant="mobile" />
             <Link
               className={
                 currentPath === "/about-us"
-                  ? "site-nav-link site-nav-link--active"
-                  : "site-nav-link"
+                  ? "site-nav-link site-nav-link--button site-nav-link--active"
+                  : "site-nav-link site-nav-link--button"
               }
               href="/about-us"
             >
@@ -300,10 +318,8 @@ function SiteFooter() {
           <LogoLockup variant="footer" />
           <p className="site-footer-copy">{sharedContent.footerDescription}</p>
           <div className="site-footer-switch">
-            <span className="site-footer-switch-label">Also available</span>
-            <SmartLink className="site-footer-switch-link" href={sharedContent.otherScreening.href}>
-              {sharedContent.otherScreening.label}
-            </SmartLink>
+            <span className="site-footer-switch-label">Screening</span>
+            <ScreeningMenu variant="footer" />
           </div>
         </div>
         <div className="site-footer-links" data-reveal="true" style={revealStyle(90, 18)}>
@@ -465,6 +481,46 @@ function HomeAboutSentence() {
   );
 }
 
+function HomeFaqSection() {
+  return (
+    <section className="section section--tight-top">
+      <div className="shell faq-grid">
+        <div className="faq-copy">
+          <div data-reveal="true" style={revealStyle(0)}>
+            <SectionTag>FAQ</SectionTag>
+          </div>
+          <h2 className="section-title" data-reveal="true" style={revealStyle(80)}>
+            Frequently asked questions
+          </h2>
+          <p className="section-copy" data-reveal="true" style={revealStyle(120)}>
+            Quick guidance for using the screening tool responsibly.
+          </p>
+        </div>
+        <div className="faq-list">
+          {homeContent.faqs.map((item, index) => (
+            <details
+              className="faq-item"
+              data-reveal="true"
+              key={item.question}
+              open={index === 0}
+              style={revealStyle(130 + index * 60, 18)}
+            >
+              <summary>
+                <span>{item.question}</span>
+                <span className="faq-toggle" aria-hidden="true">
+                  <span className="faq-toggle-plus">+</span>
+                  <span className="faq-toggle-minus">-</span>
+                </span>
+              </summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomeRouteView() {
   return (
     <main className="site-page">
@@ -482,10 +538,7 @@ export function HomeRouteView() {
               {aboutContent.whoWeAreNote}
             </p>
             <div className="hero-action-row" data-reveal="true" style={revealStyle(220)}>
-              <ButtonLink href="/contact">
-                Contact us
-              </ButtonLink>
-              <ButtonLink href="/try-now" variant="secondary">
+              <ButtonLink href="/try-now">
                 Try now
               </ButtonLink>
             </div>
@@ -537,6 +590,7 @@ export function HomeRouteView() {
       </section>
 
       {/* <TestimonialsSection /> */}
+      <HomeFaqSection />
       <CtaBand />
       <SiteFooter />
     </main>
