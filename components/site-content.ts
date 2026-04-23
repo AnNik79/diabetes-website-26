@@ -284,6 +284,10 @@ export const sharedContent = {
     { label: "About", href: "/about-us" },
     { label: "Contact", href: "/contact" },
   ],
+  otherScreening: {
+    label: "Anemia Screening",
+    href: "https://anemia.biotransportai.com/",
+  },
   footerContact: [
     {
       label: "contact@biotransportai.com",

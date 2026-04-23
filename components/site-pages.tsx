@@ -171,6 +171,31 @@ function ExternalContactLink({
   );
 }
 
+function SmartLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className: string;
+  children: ReactNode;
+}) {
+  const isExternal = href.startsWith("http");
+  if (isExternal) {
+    return (
+      <a className={className} href={href}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link className={className} href={href}>
+      {children}
+    </Link>
+  );
+}
+
 function SiteHeader({
   currentPath,
 }: {
@@ -186,6 +211,9 @@ function SiteHeader({
       <div className="shell site-header-shell">
         <LogoLockup />
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
+          <SmartLink className="site-nav-link site-nav-link--screening" href={sharedContent.otherScreening.href}>
+            {sharedContent.otherScreening.label}
+          </SmartLink>
           {navItems.map((item) =>
             item.href === "/contact" ? (
               <ButtonLink href={item.href} key={item.href}>
@@ -211,6 +239,9 @@ function SiteHeader({
             <span />
           </summary>
           <div className="site-mobile-panel">
+            <SmartLink className="site-nav-link site-nav-link--screening" href={sharedContent.otherScreening.href}>
+              {sharedContent.otherScreening.label}
+            </SmartLink>
             <Link
               className={
                 currentPath === "/about-us"
@@ -221,7 +252,16 @@ function SiteHeader({
             >
               About
             </Link>
-            <ButtonLink href="/contact">Contact us</ButtonLink>
+            <Link
+              className={
+                currentPath === "/contact"
+                  ? "site-nav-link site-nav-link--active"
+                  : "site-nav-link"
+              }
+              href="/contact"
+            >
+              Contact us
+            </Link>
           </div>
         </details>
       </div>
@@ -259,6 +299,12 @@ function SiteFooter() {
         <div className="site-footer-brand" data-reveal="true" style={revealStyle(0, 18)}>
           <LogoLockup variant="footer" />
           <p className="site-footer-copy">{sharedContent.footerDescription}</p>
+          <div className="site-footer-switch">
+            <span className="site-footer-switch-label">Also available</span>
+            <SmartLink className="site-footer-switch-link" href={sharedContent.otherScreening.href}>
+              {sharedContent.otherScreening.label}
+            </SmartLink>
+          </div>
         </div>
         <div className="site-footer-links" data-reveal="true" style={revealStyle(90, 18)}>
           <div className="footer-column">
