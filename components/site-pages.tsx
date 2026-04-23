@@ -340,6 +340,7 @@ function VisionPhoneStack() {
           alt={images.visionPhone.alt}
           width={images.visionPhone.width}
           height={images.visionPhone.height}
+          loading="eager"
         />
       </div>
     </div>

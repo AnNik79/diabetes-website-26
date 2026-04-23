@@ -21,9 +21,9 @@ export const images = {
   },
   visionPhone: {
     src: "/assets/images/home/vision-phone.png",
-    width: 696,
-    height: 695,
-    alt: "BioTransport assessment flow shown on a phone.",
+    width: 858,
+    height: 852,
+    alt: "BioTransport screening flow shown on a phone.",
   },
   aboutDoctor: {
     src: "/assets/images/about/screening-doctor.png",
