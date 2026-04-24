@@ -276,7 +276,7 @@ export const aboutContent = {
   whoWeAreDescription:
     "Our tool analyzes a single eye photo to detect early signs of diabetes\u2014no needles, no lab tests.",
   whoWeAreNote:
-    "This tool provides a preliminary risk screening and is not intended to diagnose diabetes. Always consult a qualified healthcare professional for medical advice.",
+    "This tool provides a preliminary risk screening and is not intended to diagnose diabetes. The final interpretation must be made always by a qualified healthcare medical professional.",
   cards: [
     {
       title: "Our Mission",
