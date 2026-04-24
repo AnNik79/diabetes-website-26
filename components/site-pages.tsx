@@ -521,6 +521,39 @@ function HomeFaqSection() {
   );
 }
 
+function DiabetesGuidanceSection() {
+  return (
+    <section className="section section--tight-top">
+      <div className="shell guidance-grid">
+        <div className="guidance-copy">
+          <div data-reveal="true" style={revealStyle(0)}>
+            <SectionTag>Diabetes guidance</SectionTag>
+          </div>
+          <h2 className="section-title" data-reveal="true" style={revealStyle(80)}>
+            {homeContent.useGuidance.title}
+          </h2>
+          <p className="section-copy" data-reveal="true" style={revealStyle(120)}>
+            {homeContent.useGuidance.description}
+          </p>
+        </div>
+        <div className="guidance-list">
+          {homeContent.useGuidance.sections.map((item, index) => (
+            <article
+              className="guidance-item"
+              data-reveal="true"
+              key={item.title}
+              style={revealStyle(150 + index * 55, 18)}
+            >
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomeRouteView() {
   return (
     <main className="site-page">
@@ -592,6 +625,7 @@ export function HomeRouteView() {
       {/* <TestimonialsSection /> */}
       <HomeFaqSection />
       <CtaBand />
+      <DiabetesGuidanceSection />
       <SiteFooter />
     </main>
   );

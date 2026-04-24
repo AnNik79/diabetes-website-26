@@ -324,7 +324,7 @@ export function TryNowForm() {
               <textarea
                 name="medications"
                 onChange={handleFieldChange}
-                placeholder="E.g. Metformin twice daily, Lisinopril once daily — or leave blank if none."
+                placeholder="If so, which medication, how much, and when? For example, 30 minutes ago, an hour ago, etc."
                 rows={5}
                 value={values.medications}
               />

@@ -859,6 +859,48 @@ summary::-webkit-details-marker {
   line-height: 1.7;
 }
 
+.guidance-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: start;
+}
+
+.guidance-copy {
+  width: 100%;
+  max-width: none;
+}
+
+.guidance-list {
+  display: grid;
+  gap: 14px;
+}
+
+.guidance-item {
+  border: 1px solid var(--site-border);
+  border-radius: 24px;
+  padding: clamp(20px, 3.5vw, 28px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 246, 251, 0.84));
+  box-shadow: 0 16px 32px rgba(15, 27, 63, 0.03);
+}
+
+.guidance-item h3 {
+  margin: 0;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.05rem, 0.98rem + 0.28vw, 1.22rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.guidance-item p {
+  margin: 10px 0 0;
+  color: var(--site-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
 .testimonial-grid {
   display: grid;
   gap: 20px;
@@ -1574,6 +1616,7 @@ summary::-webkit-details-marker {
   .hero-grid,
   .vision-grid,
   .faq-grid,
+  .guidance-grid,
   .about-story-grid,
   .team-grid,
   .contact-grid,
@@ -1751,6 +1794,55 @@ summary::-webkit-details-marker {
     padding: 0 18px 18px;
     font-size: 0.94rem;
     line-height: 1.6;
+  }
+
+  .guidance-grid {
+    gap: 12px;
+  }
+
+  .guidance-copy {
+    border: 1px solid rgba(23, 80, 172, 0.1);
+    border-radius: 22px;
+    padding: 18px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 246, 251, 0.82));
+    box-shadow: 0 14px 28px rgba(15, 27, 63, 0.03);
+  }
+
+  .guidance-copy .section-tag {
+    padding: 7px 11px;
+    font-size: 0.68rem;
+  }
+
+  .guidance-copy .section-title {
+    margin-top: 14px;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  .guidance-copy .section-copy {
+    margin-top: 10px;
+    font-size: 0.94rem;
+    line-height: 1.58;
+  }
+
+  .guidance-list {
+    gap: 10px;
+  }
+
+  .guidance-item {
+    border-radius: 20px;
+    padding: 18px;
+  }
+
+  .guidance-item h3 {
+    font-size: 1.02rem;
+  }
+
+  .guidance-item p {
+    font-size: 0.93rem;
+    line-height: 1.58;
   }
 
   .hero-action-row {

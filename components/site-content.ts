@@ -212,11 +212,58 @@ export const homeContent = {
         "You can use the tool periodically to monitor potential changes, such as once every few weeks or months. However, it should not replace regular checkups with a healthcare professional. If you notice concerning results, follow up with a doctor.",
     },
     {
+      question: "How can I interpret the results?",
+      answer:
+        "Results are presented as risk levels: low, moderate, or high risk. A higher risk result means you should seek medical advice for further testing. A low-risk result does not guarantee the absence of diabetes, but you are at a very low risk.",
+    },
+    {
+      question: "I already have diabetes - can I still use the diabetes risk tool?",
+      answer:
+        "Yes, this tool can be useful for both people with and without diabetes.",
+    },
+    {
       question: "Is my personal health information secure?",
       answer:
         "Yes, your data are protected using encryption and secure storage. Images and results are handled confidentially and are not shared without your consent.",
     },
+    {
+      question: "Do I need a special camera or app?",
+      answer:
+        "No, there is no special equipment required. You can use your phone's standard camera, whether it is iOS or Android. Just make sure the image is clear and well-lit for the best results.",
+    },
+    {
+      question: "Are these diagnostic tools?",
+      answer:
+        "No, this is a risk assessment tool, not a diagnostic device. It is designed to provide general insights based on the image you submit. If you have concerns about your health or receive a high-risk result, you should consult a qualified medical professional for proper testing and advice.",
+    },
   ],
+  useGuidance: {
+    title: "Using the diabetes risk tool over time",
+    description:
+      "The tool can provide additional context when used consistently, but it should always be interpreted alongside regular medical care.",
+    sections: [
+      {
+        title: "For people with diabetes",
+        body:
+          "The tool may help you observe general trends over time, which can give additional context alongside your regular monitoring routine. For example, it can offer supportive insights as you manage your condition through medication, diet, and lifestyle changes. For more meaningful observations, use the tool consistently and allow enough time after treatment changes, such as starting or adjusting medication, for effects to stabilize. Especially when using medication, the tool should be used after sufficient time has passed for the medication to take effect, so readings reflect its true impact.",
+      },
+      {
+        title: "Clinical monitoring still matters",
+        body:
+          "This tool does not replace clinically approved methods like continuous glucose monitoring.",
+      },
+      {
+        title: "For people without diabetes",
+        body:
+          "The tool offers a quick, non-invasive way to estimate potential risk and monitor changes over time. It may help highlight patterns or early indicators that suggest you should seek further medical evaluation.",
+      },
+      {
+        title: "Screening-only reminder",
+        body:
+          "In all cases, this tool is intended for screening and informational purposes only. It is not designed to diagnose, treat, or prevent any condition. Always consult a qualified healthcare professional for medical advice, testing, or confirmation.",
+      },
+    ],
+  },
 };
 
 export const aboutContent = {
