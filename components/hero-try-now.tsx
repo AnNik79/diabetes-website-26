@@ -1,6 +1,7 @@
 'use client'
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 
 type FormValues = {
@@ -112,6 +113,7 @@ export function TryNowForm() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState(defaultMessage);
   const [predictionResult, setPredictionResult] = useState<PredictionResponse | null>(null);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   function resetFeedback() {
     setSubmitState("idle");
@@ -130,6 +132,11 @@ export function TryNowForm() {
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     setFileName(file ? file.name : "No image selected yet");
+    if (submitState !== "idle" || predictionResult) resetFeedback();
+  }
+
+  function handleTermsChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setAcceptedTerms(event.target.checked);
     if (submitState !== "idle" || predictionResult) resetFeedback();
   }
 
@@ -163,6 +170,13 @@ export function TryNowForm() {
     if (!values.age.trim()) {
       setSubmitState("error");
       setMessage("Please enter your age before checking your risk.");
+      setPredictionResult(null);
+      return;
+    }
+
+    if (!acceptedTerms) {
+      setSubmitState("error");
+      setMessage("Please accept the terms and conditions before checking your risk.");
       setPredictionResult(null);
       return;
     }
@@ -333,7 +347,25 @@ export function TryNowForm() {
 
         </div>
 
-        <button className="form-submit-button" disabled={submitState === "submitting"} type="submit">
+        <label className="terms-consent">
+          <input
+            checked={acceptedTerms}
+            onChange={handleTermsChange}
+            required
+            type="checkbox"
+          />
+          <span className="terms-consent-copy">
+            By continuing, you agree that you have read and accepted our{" "}
+            <Link href="/terms">terms and conditions</Link>. You consent to the use of anonymized
+            image data for analysis and stated privacy and usage policies.
+          </span>
+        </label>
+
+        <button
+          className="form-submit-button"
+          disabled={submitState === "submitting" || !acceptedTerms}
+          type="submit"
+        >
           {submitState === "submitting" ? "Checking your risk..." : "Check my risk"}
         </button>
 

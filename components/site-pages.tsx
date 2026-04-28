@@ -8,6 +8,7 @@ import {
   contactContent,
   homeContent,
   images,
+  policyContent,
   sharedContent,
 } from "@/components/site-content";
 
@@ -219,7 +220,7 @@ function ScreeningMenu({ variant }: { variant: "nav" | "mobile" | "footer" }) {
 function SiteHeader({
   currentPath,
 }: {
-  currentPath: "/" | "/about-us" | "/contact" | "/try-now";
+  currentPath: "/" | "/about-us" | "/contact" | "/try-now" | "/terms";
 }) {
   const navItems = [
     { href: "/about-us", label: "About" },
@@ -771,6 +772,46 @@ export function AboutRouteView() {
       </section>
 
       <CtaBand />
+      <SiteFooter />
+    </main>
+  );
+}
+
+export function TermsRouteView() {
+  return (
+    <main className="site-page">
+      <SiteHeader currentPath="/terms" />
+      <section className="page-hero page-hero--narrow policy-hero">
+        <div className="shell page-hero-shell page-hero-shell--center policy-hero-shell">
+          <div className="policy-tag-wrap" data-reveal="true" style={revealStyle(0)}>
+            <SectionTag>{policyContent.eyebrow}</SectionTag>
+          </div>
+          <h1 className="page-title" data-reveal="true" style={revealStyle(70, 18)}>
+            {policyContent.title}
+          </h1>
+          <p className="page-copy" data-reveal="true" style={revealStyle(130, 18)}>
+            {policyContent.description}
+          </p>
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
+        <div className="shell policy-card-grid">
+          {policyContent.sections.map((section, index) => (
+            <article
+              className="policy-card"
+              data-reveal="true"
+              key={section.title}
+              style={revealStyle(index * 70, 18)}
+            >
+              <span className="policy-card-index">{String(index + 1).padStart(2, "0")}</span>
+              <h2>{section.title}</h2>
+              <p>{section.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <SiteFooter />
     </main>
   );

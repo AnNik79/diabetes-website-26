@@ -333,6 +333,35 @@ export const contactContent = {
   },
 };
 
+export const policyContent = {
+  eyebrow: "Terms & privacy",
+  title: "Terms, privacy, and screening disclaimer",
+  description:
+    "Review these terms before using the diabetes screening tool. Continuing means you understand how anonymized images may be used and the limits of the screening result.",
+  sections: [
+    {
+      title: "Consent to use anonymized image data",
+      body:
+        "By continuing, you agree that BioTransport may use your anonymized image data for analysis, service operation, quality review, and compliance with stated privacy and usage policies.",
+    },
+    {
+      title: "Anonymized image handling",
+      body:
+        "Uploaded images are handled as anonymized screening data and are not stored with direct identifiers such as name, email, or phone number. Do not include personally identifying information in images or free-text fields.",
+    },
+    {
+      title: "No medical or personal decision responsibility",
+      body:
+        "The developers and operators assume no responsibility for clinical, medical, or personal decisions made based on the results provided by this tool.",
+    },
+    {
+      title: "Screening-only limitation",
+      body:
+        "This tool is intended for screening and informational purposes only. It is not designed to diagnose, treat, or prevent any condition. Always consult a qualified healthcare professional for medical advice, testing, or confirmation.",
+    },
+  ],
+};
+
 export const sharedContent = {
   brand: "BioTransport Systems Development",
   footerDescription:
@@ -342,6 +371,7 @@ export const sharedContent = {
     { label: "Try now", href: "/try-now" },
     { label: "About", href: "/about-us" },
     { label: "Contact", href: "/contact" },
+    { label: "Terms", href: "/terms" },
   ],
   screeningMenu: [
     { label: "Diabetes", href: "/", current: true },
