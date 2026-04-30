@@ -296,6 +296,25 @@ export const aboutContent = {
     "Physicians, scientists, and engineers behind needle-free diabetes screening",
 };
 
+export const blogContent = {
+  eyebrow: "Blogs",
+  title: "Latest BioTransportAI updates and coverage",
+  summary:
+    "Read articles and outside coverage about our screening tools, research direction, and early detection work.",
+  articles: [
+    {
+      title:
+        "Your Eye May Know Before You Do: AI Diabetes Screening From a Single Photo",
+      description:
+        "DF Blog covers BioTransportAI's eye-photo diabetes screening approach and the potential for earlier, more accessible risk assessment.",
+      source: "DF Blog",
+      date: "April 24, 2026",
+      href: "https://diabeticfootonline.com/2026/04/24/your-eye-may-know-before-you-do-ai-diabetesscreening-from-a-single-photo-biotransportai/",
+      buttonLabel: "Read article",
+    },
+  ],
+};
+
 export const contactContent = {
   eyebrow: "Contact",
   title: "Connect with us for expert healthcare support",
@@ -370,6 +389,7 @@ export const sharedContent = {
     { label: "Home", href: "/" },
     { label: "Try now", href: "/try-now" },
     { label: "About", href: "/about-us" },
+    { label: "Blogs", href: "/blogs" },
     { label: "Contact", href: "/contact" },
     { label: "Terms", href: "/terms" },
   ],

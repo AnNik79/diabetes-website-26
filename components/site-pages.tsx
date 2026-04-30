@@ -5,6 +5,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { TryNowForm } from "@/components/hero-try-now";
 import {
   aboutContent,
+  blogContent,
   contactContent,
   homeContent,
   images,
@@ -220,10 +221,11 @@ function ScreeningMenu({ variant }: { variant: "nav" | "mobile" | "footer" }) {
 function SiteHeader({
   currentPath,
 }: {
-  currentPath: "/" | "/about-us" | "/contact" | "/try-now" | "/terms";
+  currentPath: "/" | "/about-us" | "/blogs" | "/contact" | "/try-now" | "/terms";
 }) {
   const navItems = [
     { href: "/about-us", label: "About" },
+    { href: "/blogs", label: "Blogs" },
     { href: "/contact", label: "Contact us" },
   ] as const;
 
@@ -270,6 +272,16 @@ function SiteHeader({
               href="/about-us"
             >
               About
+            </Link>
+            <Link
+              className={
+                currentPath === "/blogs"
+                  ? "site-nav-link site-nav-link--button site-nav-link--active"
+                  : "site-nav-link site-nav-link--button"
+              }
+              href="/blogs"
+            >
+              Blogs
             </Link>
             <Link
               className={
@@ -772,6 +784,59 @@ export function AboutRouteView() {
       </section>
 
       <CtaBand />
+      <SiteFooter />
+    </main>
+  );
+}
+
+export function BlogsRouteView() {
+  return (
+    <main className="site-page">
+      <SiteHeader currentPath="/blogs" />
+      <section className="page-hero page-hero--narrow">
+        <div className="shell page-hero-shell page-hero-shell--center">
+          <div data-reveal="true" style={revealStyle(0)}>
+            <SectionTag>{blogContent.eyebrow}</SectionTag>
+          </div>
+          <h1 className="page-title" data-reveal="true" style={revealStyle(70, 18)}>
+            {blogContent.title}
+          </h1>
+          <p className="page-copy" data-reveal="true" style={revealStyle(130, 18)}>
+            {blogContent.summary}
+          </p>
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
+        <div className="shell blog-page-grid">
+          {blogContent.articles.map((article, index) => (
+            <article
+              className="blog-page-card"
+              data-reveal="true"
+              key={article.href}
+              style={revealStyle(index * 70, 18)}
+            >
+              <p className="blog-page-meta">
+                {article.source} / {article.date}
+              </p>
+              <h2>{article.title}</h2>
+              <p>{article.description}</p>
+              <a
+                className="site-button site-button--primary blog-page-link"
+                href={article.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span>{article.buttonLabel}</span>
+                <span className="site-button-arrow" aria-hidden="true">
+                  <ArrowIcon />
+                </span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <SiteFooter />
     </main>
   );
