@@ -334,7 +334,6 @@ export const contactContent = {
     // },
     {
       label: "Pasadena, CA",
-      href: "https://google.com/maps/place/Pasadena,+CA/data=!4m2!3m1!1s0x80c2c2dc38330b51:0x52b41161ad18f4a?sa=X&ved=1t:242&ictx=111",
       type: "location" as const,
     },
   ],
@@ -405,7 +404,6 @@ export const sharedContent = {
     },
     {
       label: "Pasadena, CA",
-      href: "https://maps.app.goo.gl/BQZR5eSnnjG1gJoT6",
       type: "location" as const,
     },
   ],

@@ -147,15 +147,45 @@ function ButtonLink({
   );
 }
 
+type SitePath = "/" | "/about-us" | "/blogs" | "/contact" | "/try-now" | "/terms";
+
+const pageNavItems = [
+  { href: "/", label: "Home" },
+  { href: "/try-now", label: "Try now" },
+  { href: "/about-us", label: "About" },
+  { href: "/blogs", label: "Blogs" },
+  { href: "/contact", label: "Contact" },
+  { href: "/terms", label: "Terms" },
+] as const satisfies readonly { href: SitePath; label: string }[];
+
+const headerPageNavItems = [
+  { href: "/about-us", label: "About" },
+  { href: "/blogs", label: "Blogs" },
+  { href: "/contact", label: "Contact" },
+] as const satisfies readonly { href: SitePath; label: string }[];
+
 function ExternalContactLink({
   href,
   label,
   type,
 }: {
-  href: string;
+  href?: string;
   label: string;
   type: "email" | "phone" | "location";
 }) {
+  const content = (
+    <>
+      <span className="footer-contact-icon">
+        <ContactTypeIcon type={type} />
+      </span>
+      <span>{label}</span>
+    </>
+  );
+
+  if (!href) {
+    return <span className="footer-contact-link footer-contact-link--static">{content}</span>;
+  }
+
   const isExternal = href.startsWith("http");
 
   return (
@@ -165,10 +195,7 @@ function ExternalContactLink({
       rel={isExternal ? "noreferrer" : undefined}
       target={isExternal ? "_blank" : undefined}
     >
-      <span className="footer-contact-icon">
-        <ContactTypeIcon type={type} />
-      </span>
-      <span>{label}</span>
+      {content}
     </a>
   );
 }
@@ -199,6 +226,40 @@ function SmartLink({
 }
 
 function ScreeningMenu({ variant }: { variant: "nav" | "mobile" | "footer" }) {
+  if (variant !== "footer") {
+    const currentItem =
+      sharedContent.screeningMenu.find((item) => item.current) ?? sharedContent.screeningMenu[0];
+
+    return (
+      <details className={`screening-select screening-select--${variant}`}>
+        <summary
+          className="screening-select-summary"
+          aria-label={`Current screening: ${currentItem.label}`}
+        >
+          <span className="screening-select-kicker">Screening</span>
+          <span className="screening-select-current">{currentItem.label}</span>
+          <span className="screening-select-chevron" aria-hidden="true" />
+        </summary>
+        <div className="screening-select-panel">
+          {sharedContent.screeningMenu.map((item) => (
+            <SmartLink
+              className={
+                item.current
+                  ? "screening-select-link screening-select-link--active"
+                  : "screening-select-link"
+              }
+              href={item.href}
+              key={item.label}
+            >
+              <span>{item.label}</span>
+              {item.current ? <span className="screening-select-status">Current</span> : null}
+            </SmartLink>
+          ))}
+        </div>
+      </details>
+    );
+  }
+
   return (
     <div className={`screening-menu screening-menu--${variant}`} aria-label="Choose screening type">
       {sharedContent.screeningMenu.map((item) => (
@@ -218,42 +279,47 @@ function ScreeningMenu({ variant }: { variant: "nav" | "mobile" | "footer" }) {
   );
 }
 
-function SiteHeader({
-  currentPath,
-}: {
-  currentPath: "/" | "/about-us" | "/blogs" | "/contact" | "/try-now" | "/terms";
-}) {
-  const navItems = [
-    { href: "/about-us", label: "About" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/contact", label: "Contact us" },
-  ] as const;
+function MobilePageLinks({ currentPath }: { currentPath: SitePath }) {
+  return (
+    <div className="mobile-page-list">
+      <span className="mobile-page-label">Pages</span>
+      {pageNavItems.map((item) => {
+        const isActive = currentPath === item.href;
 
+        return (
+          <Link
+            className={isActive ? "site-nav-link site-nav-link--active" : "site-nav-link"}
+            href={item.href}
+            key={item.href}
+          >
+            {item.label}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+function SiteHeader({ currentPath }: { currentPath: SitePath }) {
   return (
     <header className="site-header" data-reveal="true" style={revealStyle(0, 18)}>
       <div className="shell site-header-shell">
         <LogoLockup />
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
           <ScreeningMenu variant="nav" />
-          {navItems.map((item) =>
-            item.href === "/contact" ? (
-              <ButtonLink href={item.href} key={item.href}>
-                {item.label}
-              </ButtonLink>
-            ) : (
-              <Link
-                key={item.href}
-                className={
-                  currentPath === item.href
-                    ? "site-nav-link site-nav-link--button site-nav-link--active"
-                    : "site-nav-link site-nav-link--button"
-                }
-                href={item.href}
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
+          {headerPageNavItems.map((item) => (
+            <Link
+              className={
+                currentPath === item.href
+                  ? "site-nav-link site-nav-link--button site-nav-link--active"
+                  : "site-nav-link site-nav-link--button"
+              }
+              href={item.href}
+              key={item.href}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
         <details className="site-nav site-nav--mobile">
           <summary className="site-nav-toggle" aria-label="Open navigation">
@@ -263,36 +329,7 @@ function SiteHeader({
           </summary>
           <div className="site-mobile-panel">
             <ScreeningMenu variant="mobile" />
-            <Link
-              className={
-                currentPath === "/about-us"
-                  ? "site-nav-link site-nav-link--button site-nav-link--active"
-                  : "site-nav-link site-nav-link--button"
-              }
-              href="/about-us"
-            >
-              About
-            </Link>
-            <Link
-              className={
-                currentPath === "/blogs"
-                  ? "site-nav-link site-nav-link--button site-nav-link--active"
-                  : "site-nav-link site-nav-link--button"
-              }
-              href="/blogs"
-            >
-              Blogs
-            </Link>
-            <Link
-              className={
-                currentPath === "/contact"
-                  ? "site-nav-link site-nav-link--active"
-                  : "site-nav-link"
-              }
-              href="/contact"
-            >
-              Contact us
-            </Link>
+            <MobilePageLinks currentPath={currentPath} />
           </div>
         </details>
       </div>
@@ -338,22 +375,26 @@ function SiteFooter() {
         <div className="site-footer-links" data-reveal="true" style={revealStyle(90, 18)}>
           <div className="footer-column">
             <span className="footer-label">Pages</span>
-            {sharedContent.footerLinks.map((item) => (
-              <Link className="footer-link" href={item.href} key={item.href}>
-                {item.label}
-              </Link>
-            ))}
+            <div className="footer-page-list">
+              {sharedContent.footerLinks.map((item) => (
+                <Link className="footer-link" href={item.href} key={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="footer-column">
+          <div className="footer-column footer-column--contact">
             <span className="footer-label">Address</span>
-            {sharedContent.footerContact.map((item) => (
-              <ExternalContactLink
-                href={item.href}
-                key={`${item.type}-${item.label}`}
-                label={item.label}
-                type={item.type}
-              />
-            ))}
+            <div className="footer-contact-list">
+              {sharedContent.footerContact.map((item) => (
+                <ExternalContactLink
+                  href={item.href}
+                  key={`${item.type}-${item.label}`}
+                  label={item.label}
+                  type={item.type}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -367,11 +408,32 @@ function ContactInfoCard({
   type,
   delay,
 }: {
-  href: string;
+  href?: string;
   label: string;
   type: "email" | "phone" | "location";
   delay: number;
 }) {
+  const content = (
+    <>
+      <span className="contact-info-icon">
+        <ContactTypeIcon type={type} />
+      </span>
+      <span>{label}</span>
+    </>
+  );
+
+  if (!href) {
+    return (
+      <div
+        className="contact-info-card contact-info-card--static"
+        data-reveal="true"
+        style={revealStyle(delay, 18)}
+      >
+        {content}
+      </div>
+    );
+  }
+
   const isExternal = href.startsWith("http");
 
   return (
@@ -383,10 +445,7 @@ function ContactInfoCard({
       style={revealStyle(delay, 18)}
       target={isExternal ? "_blank" : undefined}
     >
-      <span className="contact-info-icon">
-        <ContactTypeIcon type={type} />
-      </span>
-      <span>{label}</span>
+      {content}
     </a>
   );
 }
@@ -753,7 +812,7 @@ export function AboutRouteView() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--about-cards">
         <div className="shell about-card-grid">
           {aboutContent.cards.map((card, index) => (
             <article
