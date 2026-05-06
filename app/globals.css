@@ -1173,7 +1173,7 @@ summary::-webkit-details-marker {
 
 .site-footer-shell {
   display: grid;
-  grid-template-columns: minmax(320px, 0.95fr) minmax(360px, 0.82fr);
+  grid-template-columns: minmax(280px, 0.55fr) minmax(440px, 1fr);
   gap: clamp(28px, 5vw, 72px);
   align-items: stretch;
   border-top: 1px solid var(--site-border);
@@ -1227,7 +1227,7 @@ summary::-webkit-details-marker {
   width: 100%;
   align-items: start;
   gap: 14px;
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 0.86fr);
+  grid-template-columns: minmax(150px, 1fr) minmax(130px, 0.5fr) minmax(260px, 1fr);
 }
 
 .footer-column {
@@ -1244,7 +1244,8 @@ summary::-webkit-details-marker {
   background: rgba(255, 255, 255, 0.58);
 }
 
-.footer-column--contact {
+.footer-column--contact,
+.footer-column--social {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1254,11 +1255,18 @@ summary::-webkit-details-marker {
 
 .footer-page-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(86px, 1fr));
-  gap: 10px 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
 }
 
 .footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-social-list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1274,18 +1282,27 @@ summary::-webkit-details-marker {
 }
 
 .footer-link,
-.footer-contact-link {
+.footer-contact-link,
+.footer-social-link {
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
 .footer-contact-link {
-  display: inline-flex;
+  font-size: 0.92rem;
+}
+
+.footer-contact-link,
+.footer-social-link {
+  display: flex;
   align-items: center;
   min-height: 0;
   gap: 9px;
   line-height: 1.15;
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .footer-contact-link--static {
@@ -1293,6 +1310,7 @@ summary::-webkit-details-marker {
 }
 
 .footer-contact-icon,
+.footer-social-icon,
 .contact-info-icon {
   display: inline-flex;
   width: 38px;
@@ -1305,18 +1323,22 @@ summary::-webkit-details-marker {
   box-shadow: var(--site-shadow-button);
 }
 
-.footer-contact-icon {
+.footer-contact-icon,
+.footer-social-icon {
   width: 28px;
   height: 28px;
+  flex: 0 0 28px;
   box-shadow: 0 8px 14px rgba(23, 80, 172, 0.1);
 }
 
-.footer-contact-icon .site-contact-icon {
+.footer-contact-icon .site-contact-icon,
+.footer-social-icon .site-social-icon {
   width: 14px;
   height: 14px;
 }
 
-.site-contact-icon {
+.site-contact-icon,
+.site-social-icon {
   width: 18px;
   height: 18px;
 }

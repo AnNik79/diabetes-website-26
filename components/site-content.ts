@@ -26,16 +26,16 @@ export const images = {
     alt: "BioTransport screening flow shown on a phone.",
   },
   aboutDoctor: {
-    src: "/assets/images/about/screening-doctor.png",
-    width: 1024,
-    height: 1536,
-    alt: "Doctor supporting a screening patient.",
+    src: "/assets/images/about/eye-drawing.webp",
+    width: 428,
+    height: 428,
+    alt: "Eye drawing used for diabetes screening.",
   },
   aboutNurse: {
-    src: "/assets/images/about/support-nurse.png",
-    width: 1024,
-    height: 1389,
-    alt: "Support nurse answering a call.",
+    src: "/assets/images/about/eye-drawing.webp",
+    width: 428,
+    height: 428,
+    alt: "Eye drawing used for diabetes screening.",
   },
   teamLead: {
     src: "/assets/images/about/team-lead.webp",
@@ -392,9 +392,16 @@ export const sharedContent = {
     { label: "Contact", href: "/contact" },
     { label: "Terms", href: "/terms" },
   ],
+  footerSocial: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/biotransport-systems-development/",
+    },
+  ],
   screeningMenu: [
     { label: "Diabetes", href: "/", current: true },
     { label: "Anemia", href: "https://anemia.biotransportai.com/", current: false },
+    { label: "Glaucoma", href: "https://glaucoma.biotransportai.com/", current: false },
   ],
   footerContact: [
     {

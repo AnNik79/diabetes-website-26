@@ -69,6 +69,17 @@ function MapPinIcon() {
   );
 }
 
+function LinkedInIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="site-social-icon">
+      <path
+        d="M5.29 8.94h3.36v10.8H5.29V8.94Zm1.68-4.68c1.08 0 1.96.88 1.96 1.96s-.88 1.95-1.96 1.95A1.95 1.95 0 0 1 5 6.22c0-1.08.88-1.96 1.97-1.96Zm3.8 4.68h3.22v1.48h.05c.45-.85 1.55-1.74 3.18-1.74 3.4 0 4.03 2.24 4.03 5.16v5.9h-3.36v-5.23c0-1.25-.02-2.85-1.74-2.85-1.74 0-2.01 1.36-2.01 2.76v5.32h-3.37V8.94Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 function ContactTypeIcon({
   type,
 }: {
@@ -380,6 +391,26 @@ function SiteFooter() {
                 <Link className="footer-link" href={item.href} key={item.href}>
                   {item.label}
                 </Link>
+              ))}
+            </div>
+          </div>
+          <div className="footer-column footer-column--social">
+            <span className="footer-label">Social</span>
+            <div className="footer-social-list">
+              {sharedContent.footerSocial.map((item) => (
+                <a
+                  aria-label={`${item.label} profile`}
+                  className="footer-social-link"
+                  href={item.href}
+                  key={item.href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <span className="footer-social-icon">
+                    <LinkedInIcon />
+                  </span>
+                  <span>{item.label}</span>
+                </a>
               ))}
             </div>
           </div>
