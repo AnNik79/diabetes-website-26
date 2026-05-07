@@ -401,7 +401,7 @@ export const sharedContent = {
   screeningMenu: [
     { label: "Diabetes", href: "/", current: true },
     { label: "Anemia", href: "https://anemia.biotransportai.com/", current: false },
-    { label: "Glaucoma", href: "https://glaucoma.biotransportai.com/", current: false },
+    { label: "Glaucoma", href: "http://13.59.140.61:8501/", current: false },
   ],
   footerContact: [
     {
